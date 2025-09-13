@@ -1,0 +1,104 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Cart | KICK'S BRAND</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Furni navigation bar">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'index' %}">KICK'S BRAND<span>.</span></a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsFurni">
+      <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'contactus' %}">Contact</a></li>
+      </ul>
+
+      <ul class="custom-navbar-cta navbar-nav ms-3 mb-2 mb-md-0">
+        <li class="nav-item"><a class="nav-link" href="{% url 'userprofile' %}"><img src="{% static 'images/user.svg' %}" alt="User"></a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'images/cart.svg' %}" alt="Cart"></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- Cart Section -->
+<section class="container my-5">
+  <h2 class="mb-4">Shopping Cart</h2>
+  
+  {% if cart_items %}
+  <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+      <thead class="bg-#3b5d50">
+        <tr>
+          <th>Product</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart_items %}
+        <tr>
+          <td>{{ item.product.name }}</td>
+          <td><img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-thumbnail" style="max-width:80px;"></td>
+          <td>${{ item.product.price }}</td>
+          <td>
+            <form action="{% url 'update_cart' item.id %}" method="post" class="d-flex">
+              {% csrf_token %}
+              <input type="number" name="quantity" value="{{ item.quantity }}" min="0" class="form-control w-50 me-2">
+              <button type="submit" class="btn btn-primary btn-sm">Update</button>
+            </form>
+          </td>
+          <td>${{ item.total }}</td>
+          <td>
+            <a href="{% url 'remove_from_cart' item.id %}" class="btn btn-danger btn-sm">
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <h4>Total: ${{ cart_total }}</h4>
+  </div>
+
+  <div class="d-flex justify-content-between mt-4">
+    <a href="{% url 'shop' %}" class="btn btn-secondary">Continue Shopping</a>
+    <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+  </div>
+
+  {% else %}
+  <div class="alert alert-info text-center">
+    Your cart is empty. <a href="{% url 'shop' %}">Start shopping</a>.
+  </div>
+  {% endif %}
+</section>
+
+<footer class="bg-dark text-white text-center py-3">
+  &copy; {{ now|date:"Y" }} KICK'S BRAND. All rights reserved.
+</footer>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

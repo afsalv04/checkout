@@ -1,0 +1,136 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="{% static 'css/tiny-slider.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <title>User Profile | KICK'S BRAND</title>
+</head>
+<body>
+
+<!-- Start Header/Navigation -->
+<nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">KICK'S BRAND<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsFurni">
+      <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+        <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+        <li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+        <li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
+        <li><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+        <li><a class="nav-link" href="{% url 'contactus' %}">Contact us</a></li>
+        <li><a class="nav-link" href="{% url 'user_login' %}">Login</a></li>
+      </ul>
+
+      <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+        <li><a class="nav-link" href="{% url 'userprofile' %}"><img src="{% static 'images/user.svg' %}"></a></li>
+        <li><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'images/cart.svg' %}"></a></li>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- End Header/Navigation -->
+
+<!-- User Profile Section -->
+<section class="container my-5">
+  <h2 class="mb-4 section-title">User Profile</h2>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post" class="w-50">
+    {% csrf_token %}
+    <!-- <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+    </div> -->
+
+     <div class="mb-3">
+      <label for="first_name" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
+    </div>
+
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+  </form>
+
+
+   <!-- Logout button -->
+        <li>
+          <form method="post" action="{% url 'user_logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-light btn-sm ms-3">Logout</button>
+          </form>
+        </li>
+</section>
+<!-- End User Profile Section -->
+
+<!-- Start Footer Section -->
+<footer class="footer-section">
+  <div class="container relative">
+    <div class="sofa-img">
+      <img src="https://www.walkaroo.in/cdn/shop/files/1_1c9f70dd-7805-4cfe-be62-e1c022e33899.jpg?v=1753514069" alt="Image" class="img-fluid">
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="subscription-form">
+          <h3 class="d-flex align-items-center"><span class="me-1"><img src="{% static 'images/envelope-outline.svg' %}" alt="Image" class="img-fluid"></span><span>Subscribe to Newsletter</span></h3>
+          <form action="#" class="row g-3">
+            <div class="col-auto">
+              <input type="text" class="form-control" placeholder="Enter your name">
+            </div>
+            <div class="col-auto">
+              <input type="email" class="form-control" placeholder="Enter your email">
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-primary">
+                <span class="fa fa-paper-plane"></span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-top copyright">
+      <div class="row pt-4">
+        <div class="col-lg-6">
+          <p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed with love by <a href="https://untree.co">Untree.co</a></p>
+        </div>
+        <div class="col-lg-6 text-center text-lg-end">
+          <ul class="list-unstyled d-inline-flex ms-auto">
+            <li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- End Footer Section -->
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/tiny-slider.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>

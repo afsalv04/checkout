@@ -1,0 +1,171 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Untree.co">
+  <link rel="shortcut icon" href="{% static 'favicon.png' %}">
+
+  <meta name="description" content="" />
+  <meta name="keywords" content="bootstrap, bootstrap4" />
+
+  <!-- Bootstrap CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="{% static 'css/tiny-slider.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <title>Kick's Brand Shop</title>
+</head>
+
+<body>
+
+  <!-- Start Header/Navigation -->
+  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">KICK'S BRAND<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsFurni">
+        <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+          <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+          <li class="nav-item active"><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+          <li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
+          <li><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+          <li><a class="nav-link" href="{% url 'contactus' %}">Contact us</a></li>
+        </ul>
+        <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+          <li><a class="nav-link" href="{% url 'userprofile' %}"><img src="{% static 'images/user.svg' %}" alt="User"></a></li>
+          <li><a class="nav-link" href="{% url 'cart' %}"><img src="{% static 'images/cart.svg' %}" alt="Cart"></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Header/Navigation -->
+
+  <!-- Start Hero Section -->
+  <div class="hero">
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-lg-5">
+          <div class="intro-excerpt">
+            <h1>Running Shoe</h1>
+          </div>
+        </div>
+        <div class="col-lg-7"></div>
+      </div>
+    </div>
+  </div>
+  <!-- End Hero Section -->
+
+  <!-- Products Section -->
+  <div class="product-section">
+    <div class="container">
+      <div class="row">
+        <!-- Example Men Section -->
+        <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+          <h2 class="mb-4 section-title">Men</h2>
+          <p class="mb-4">Elevate your everyday look with premium men’s shoes built for comfort, durability, and timeless style.</p>
+        </div>
+
+        <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+          <a class="product-item" href="{% url 'singleproduct' 1 %}">
+            <img src="{% static 'images\men_nike.avif' %}" class="img-fluid product-thumbnail" style="width:100%; height:250px; object-fit:cover; border-radius:10px; background-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <h3 class="product-title">Nike</h3>
+            <strong class="product-price">$349.00</strong>
+            <span class="icon-cross"><img src="{% static 'images/cross.svg' %}" class="img-fluid"></span>
+          </a>
+        </div>
+
+         <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+          <a class="product-item" href="{% url 'singleproduct' 2 %}">
+            <img src="{% static 'images\men_adidas.jpg' %}" class="img-fluid product-thumbnail" style="width:100%; height:250px; object-fit:cover; border-radius:10px; background-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <h3 class="product-title">Adidas</h3>
+            <strong class="product-price">$200.00</strong>
+            <span class="icon-cross"><img src="{% static 'images/cross.svg' %}" class="img-fluid"></span>
+          </a>
+        </div>
+
+
+         <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+          <a class="product-item" href="{% url 'singleproduct' 3 %}">
+            <img src="{% static 'images\men_puma.avif' %}" class="img-fluid product-thumbnail" style="width:100%; height:250px; object-fit:cover; border-radius:10px; background-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <h3 class="product-title">puma</h3>
+            <strong class="product-price">$299.00</strong>
+            <span class="icon-cross"><img src="{% static 'images/cross.svg' %}" class="img-fluid"></span>
+          </a>
+        </div>
+
+        <!-- Add other products similarly, replacing image URLs, names, prices, and links -->
+      </div>
+
+      <!-- Example Women Section -->
+      <div class="row mt-5">
+        <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+          <h2 class="mb-4 section-title">Women</h2>
+          <p class="mb-4">Step into elegance and confidence with women’s shoes designed to blend fashion, comfort, and versatility.</p>
+        </div>
+
+        <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+          <a class="product-item" href="{% url 'singleproduct' 4 %}">
+            <img src="{% static 'images\women_nike.avif' %}" class="img-fluid product-thumbnail" style="width:100%; height:250px; object-fit:cover; border-radius:10px; background-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <h3 class="product-title">Nike</h3>
+            <strong class="product-price">$299.00</strong>
+            <span class="icon-cross"><img src="{% static 'images/cross.svg' %}" class="img-fluid"></span>
+          </a>
+        </div>
+
+         <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+          <a class="product-item" href="{% url 'singleproduct' 5 %}">
+            <img src="{% static 'images\women_adidas.jpg' %}" class="img-fluid product-thumbnail" style="width:100%; height:250px; object-fit:cover; border-radius:10px; background-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <h3 class="product-title">Adidas</h3>
+            <strong class="product-price">$249.00</strong>
+            <span class="icon-cross"><img src="{% static 'images/cross.svg' %}" class="img-fluid"></span>
+          </a>
+        </div>
+
+         <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+          <a class="product-item" href="{% url 'singleproduct' 6 %}">
+            <img src="{% static 'images\women_puma.jpg' %}" class="img-fluid product-thumbnail" style="width:100%; height:250px; object-fit:cover; border-radius:10px; background-color:white; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <h3 class="product-title">Puma</h3>
+            <strong class="product-price">$230.00</strong>
+            <span class="icon-cross"><img src="{% static 'images/cross.svg' %}" class="img-fluid"></span>
+          </a>
+        </div>
+
+        <!-- Add other women's products similarly -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-section mt-5">
+    <div class="container relative">
+      <div class="sofa-img">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0" alt="Image" class="img-fluid mt-5">
+      </div>
+
+      <div class="row g-5 mb-5">
+        <div class="col-lg-4">
+          <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Kick's Brand<span>.</span></a></div>
+          <p class="mb-4">Kick’s is your go-to destination for fresh, authentic sneakers. Premium kicks with fast, free shipping and hassle-free returns.</p>
+
+          <ul class="list-unstyled custom-social">
+            <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+            <li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
+            <li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+            <li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/tiny-slider.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>
