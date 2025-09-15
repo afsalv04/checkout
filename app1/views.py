@@ -443,3 +443,56 @@ def order_summary(request, order_id):
     return render(request, "order_summary.html", {"order": order})
 
 
+
+
+import razorpay
+from django.conf import settings
+from django.http import JsonResponse
+from django.shortcuts import redirect
+from django.views.decorators.csrf import csrf_exempt
+from .models import Order  # Adjust the import based on your project structure
+
+# Initialize Razorpay client
+client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+@csrf_exempt
+def razorpay_payment(request,order_id):
+    if request.method == 'POST':
+        try:
+            # Get order details
+            order = Order.objects.get(id=order_id)
+            total = order.total  # Ensure this field exists in your model
+
+            # Razorpay amount should be in paise
+            amount_in_paise = int(float(order.total) * 100)
+
+            
+
+            # Create Razorpay order
+            razorpay_order = client.order.create({
+                "amount": amount_in_paise,
+                "currency": "INR",
+                "payment_capture": 1  # Auto-capture after payment
+            })
+
+            # Save Razorpay order ID to your database (optional)
+            order.razorpay_order_id = razorpay_order['id']
+            order.save()
+
+            # Return Razorpay order details to the frontend
+            return JsonResponse({
+                'razorpay_order_id': razorpay_order['id'],
+                'razorpay_key_id': settings.RAZORPAY_KEY_ID,
+                'amount': amount_in_paise,
+                'currency': "INR"
+            })
+
+        except Order.DoesNotExist:
+            return JsonResponse({'error': 'Order not found'}, status=404)
+
+    return JsonResponse({'error': 'Invalid Request'}, status=500)
+
+
+
+    
+

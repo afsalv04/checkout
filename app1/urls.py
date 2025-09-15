@@ -24,6 +24,8 @@ urlpatterns=[
     path('userprofile/',views.userprofile,name="userprofile"),
     path('logout/', views.user_logout, name='user_logout'),
     path("order-summary/<int:order_id>/", views.order_summary, name="order_summary"),
+    path("payment/<int:order_id>/", views.razorpay_payment, name="razorpay_payment"),
+
 
     
 
